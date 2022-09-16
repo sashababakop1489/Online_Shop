@@ -1,56 +1,56 @@
 package com.babakov.service.impl;
 
+import com.babakov.persistence.crud.CrudRepositoryHelper;
+import com.babakov.persistence.datatable.DataTableRequest;
+import com.babakov.persistence.datatable.DataTableResponse;
 import com.babakov.persistence.entity.Brand;
-import com.babakov.persistence.entity.Product;
 import com.babakov.persistence.repository.BrandRepository;
-import com.babakov.persistence.repository.ProductRepository;
 import com.babakov.service.BrandService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class BrandServiceImpl implements BrandService {
-    @Autowired
+
     private final BrandRepository brandRepository;
-    @Autowired
-    private final ProductRepository productRepository;
+    private final CrudRepositoryHelper<Brand, BrandRepository> crudRepositoryHelper;
 
-    public BrandServiceImpl(BrandRepository brandRepository, ProductRepository productRepository) {
+    public BrandServiceImpl(BrandRepository brandRepository, CrudRepositoryHelper<Brand, BrandRepository> crudRepositoryHelper) {
         this.brandRepository = brandRepository;
-        this.productRepository = productRepository;
+        this.crudRepositoryHelper = crudRepositoryHelper;
     }
 
     @Override
-    public void create(Brand brand) {
-        brandRepository.save(brand);
+    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public void create(Brand entity) {
+        crudRepositoryHelper.create(brandRepository, entity);
     }
 
     @Override
-    public void update(Brand brand) {
-        brandRepository.save(brand);
+    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public void update(Brand entity) {
+        crudRepositoryHelper.update(brandRepository, entity);
     }
 
     @Override
+    @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void delete(Long id) {
-        Optional<Brand> brand = brandRepository.findById(id);
-        if (brand.isPresent()) {
-            List<Product> products = productRepository.findAllByBrandId(id);
-            for (Product product : products)
-                productRepository.deleteById(product.getId());
-            brandRepository.delete(brand.get());
-        }
+        crudRepositoryHelper.delete(brandRepository, id);
     }
 
     @Override
-    public Brand findById(Long id) {
-        return brandRepository.findById(id).get();
+    @Transactional(readOnly = true)
+    public Optional<Brand> findById(Long id) {
+        return crudRepositoryHelper.findById(brandRepository, id);
     }
 
     @Override
-    public List<Brand> findAll() {
-        return brandRepository.findAll();
+    @Transactional(readOnly = true)
+    public DataTableResponse<Brand> findAll(DataTableRequest request) {
+        return crudRepositoryHelper.findAll(brandRepository, request);
     }
 }

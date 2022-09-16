@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+body {
+    background: url('https://stat.citydog.by/content/editor_images/2017/08_august/04_consumerism/store-1338629_1280.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+a.nav-item.nav-link {
+    color: white;
+}
+
+.sort {
+    cursor: pointer;
+    margin-right: 2em;
+}

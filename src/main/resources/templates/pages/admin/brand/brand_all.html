@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/data_table_layout}">
+<head>
+    <meta charset="utf-8">
+    <title>All product</title>
+</head>
+<body>
+
+<div layout:fragment="data_table_content">
+    <tr th:each="brand,iter : ${pageData.getItems()}">
+        <td th:text="${iter.count}"></td>
+        <td>
+            <img th:src="@{${brand.getBrandImage}}" width="45" height="45"/>
+        </td>
+        <td th:text="${brand.getBrandName()}"></td>
+
+        <td>
+            <a th:href="@{'/admin/brands/details/' + ${brand.getId()}}" type="button" class="btn btn-primary">details</a>
+        </td>
+        <td>
+            <a th:href="@{'/admin/brands/delete/' + ${product.getId()}}" type="button" class="btn btn-danger">delete</a>
+        </td>
+    </tr>
+</div>
+<div class="col-12">
+    <div class="card mt-2">
+        <div class="card-header">
+            <a type="button" class="btn btn-primary" th:href="@{/brands/create}">Add</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

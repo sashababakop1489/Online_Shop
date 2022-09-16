@@ -1,11 +1,12 @@
 package com.babakov.persistence.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+@Getter
+@Setter
 @Entity
-@org.hibernate.annotations.Entity
 @Table(name = "brands")
 public class Brand extends BaseEntity {
 
@@ -14,13 +15,8 @@ public class Brand extends BaseEntity {
     }
 
     @Column(nullable = false, unique = true)
-    private String name;
+    private String brandName;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Column(name = "image_url")
+    private String imageUrl;
 }

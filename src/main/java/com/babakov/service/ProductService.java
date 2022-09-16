@@ -1,7 +1,6 @@
 package com.babakov.service;
 
 import com.babakov.persistence.entity.Product;
-import com.babakov.persistence.repository.ProductRepository;
 
 import java.util.List;
 

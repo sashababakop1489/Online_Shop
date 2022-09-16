@@ -9,7 +9,7 @@ import java.util.Map;
 public class DataTableResponse<E extends BaseEntity> {
     private int currentPage;
     private int pageSize;
-    private int totalPageSize;
+    private int totalPages;
     private long itemsSize;
     private String sort;
     private String order;
@@ -79,11 +79,11 @@ public class DataTableResponse<E extends BaseEntity> {
         this.order = order;
     }
 
-    public int getTotalPageSize() {
-        return totalPageSize;
+    public int getTotalPages() {
+        return totalPages;
     }
 
-    public void setTotalPageSize(int totalPageSize) {
-        this.totalPageSize = totalPageSize;
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
     }
 }

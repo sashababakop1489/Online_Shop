@@ -1,16 +1,26 @@
 package com.babakov.facade.impl;
 
-import com.babakov.dto.product.ProductRequestDto;
-import com.babakov.dto.product.ProductResponseDto;
 import com.babakov.facade.ProductFacade;
+import com.babakov.persistence.datatable.DataTableRequest;
+import com.babakov.persistence.datatable.DataTableResponse;
 import com.babakov.persistence.entity.Brand;
 import com.babakov.persistence.entity.Product;
 import com.babakov.service.BrandService;
 import com.babakov.service.ProductService;
 
+import com.babakov.util.WebUtil;
+import com.babakov.web.dto.request.ProductRequestDto;
+import com.babakov.web.dto.response.PageData;
+import com.babakov.web.dto.response.ProductResponseDto;
+import lombok.SneakyThrows;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.WebRequest;
+
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class ProductFacadeImpl implements ProductFacade {
 
     private final ProductService productService;
@@ -20,31 +30,36 @@ public class ProductFacadeImpl implements ProductFacade {
         this.productService = productService;
         this.brandService = brandService;
     }
-
+    @SneakyThrows
     @Override
     public void create(ProductRequestDto productRequestDto) {
-        Brand brand = brandService.findById(productRequestDto.getBrandId());
-        Product product = new Product();
-        product.setName(productRequestDto.getName());
-        product.setColor(productRequestDto.getColor());
-        product.setDescription(productRequestDto.getDescription());
-        product.setPrice(productRequestDto.getPrice());
-        product.setImageUrl(productRequestDto.getImageUrl());
-        product.setQuantity(productRequestDto.getQuantity());
-        product.setBrand(brand);
-        productService.create(product);
+        Optional<Brand> optionalBrand = brandService.findById(productRequestDto.getBrandId());
+        if (optionalBrand.isPresent()) {
+            Product product = new Product();
+            product.setProductName(productRequestDto.getProductName());
+            product.setQuantity(product.getQuantity());
+            product.setPrice(productRequestDto.getPrice());
+            product.setColor(productRequestDto.getColor());
+            product.setImageUrl(new String(productRequestDto.getProductImage().getBytes()));
+            product.setSize(productRequestDto.getSize());
+            product.setBrand(optionalBrand.get());
+            productService.create(product);
+        }
     }
-
+    @SneakyThrows
     @Override
     public void update(ProductRequestDto productRequestDto, Long id) {
-        Product product = productService.findById(id);
-        product.setName(productRequestDto.getName());
-        product.setColor(productRequestDto.getColor());
-        product.setDescription(productRequestDto.getDescription());
-        product.setPrice(productRequestDto.getPrice());
-        product.setImageUrl(productRequestDto.getImageUrl());
-        product.setQuantity(productRequestDto.getQuantity());;
-        productService.update(product);
+        Optional<Product> optionalProduct = productService.findById(id);
+        if (optionalProduct.isPresent()){
+            Product product = optionalProduct.get();
+            product.setProductName(productRequestDto.getProductName());
+            product.setQuantity(product.getQuantity());
+            product.setPrice(productRequestDto.getPrice());
+            product.setColor(productRequestDto.getColor());
+            product.setImageUrl(new String(productRequestDto.getProductImage().getBytes()));
+            product.setSize(productRequestDto.getSize());
+            productService.update(product);
+        }
     }
 
     @Override
@@ -54,13 +69,20 @@ public class ProductFacadeImpl implements ProductFacade {
 
     @Override
     public ProductResponseDto findById(Long id) {
-
-        return new ProductResponseDto(productService.findById(id));
+        return new ProductResponseDto(productService.findById(id).get());
     }
 
     @Override
-    public List<ProductResponseDto> findAll() {
-        return convertToDtoByEntity(productService.findAll());
+    public PageData<ProductResponseDto> findAll(WebRequest request) {
+        DataTableRequest dataTableRequest = WebUtil.generateDataTableRequestByWebRequest(request);
+        DataTableResponse<Product> tableResponse = productService.findAll(dataTableRequest);
+        List<ProductResponseDto> products = tableResponse.getItems().stream().
+                map(ProductResponseDto::new).
+                collect(Collectors.toList());
+
+        PageData<ProductResponseDto> pageData = (PageData<ProductResponseDto>) WebUtil.initPageData(tableResponse);
+        pageData.setItems(products);
+        return pageData;
     }
 
     @Override
@@ -68,8 +90,8 @@ public class ProductFacadeImpl implements ProductFacade {
         return convertToDtoByEntity(productService.findAllByBrandId(brandId));
     }
 
-    private List<ProductResponseDto> convertToDtoByEntity(List<Product> players) {
-        return players.stream()
+    private List<ProductResponseDto> convertToDtoByEntity(List<Product> products) {
+        return products.stream()
                 .map(ProductResponseDto::new)
                 .collect(Collectors.toList());
     }
