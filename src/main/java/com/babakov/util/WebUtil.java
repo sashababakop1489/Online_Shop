@@ -1,10 +1,10 @@
 package com.babakov.util;
 
-import com.babakov.web.dto.response.ResponseDto;
 import com.babakov.persistence.datatable.DataTableRequest;
 import com.babakov.persistence.datatable.DataTableResponse;
 import com.babakov.persistence.entity.BaseEntity;
 import com.babakov.web.dto.response.PageData;
+import com.babakov.web.dto.response.ResponseDto;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.WebRequest;
 
@@ -14,7 +14,7 @@ public final class WebUtil {
     private static final String SIZE_PARAM = "size";
     private static final String SORT_PARAM = "sort";
     private static final String ORDER_PARAM = "order";
-    public static final String DEFAULT_SORT_PARAM_VALUE = "created";
+    public static final String DEFAULT_SORT_PARAM_VALUE = "id";
     public static final String DEFAULT_ORDER_PARAM_VALUE = "desc";
     public static final int DEFAULT_PAGE_PARAM_VALUE = 1;
     public static final int DEFAULT_SIZE_PARAM_VALUE = 10;
@@ -51,8 +51,8 @@ public final class WebUtil {
         pageData.setPageSize(tableResponse.getPageSize());
         pageData.setOrder(tableResponse.getOrder());
         pageData.setSort(tableResponse.getSort());
-        pageData.setItemsSize(tableResponse.getItemsSize());
-        pageData.initPaginationState();
+        pageData.setItemsSize(tableResponse.getItems().size());
+        pageData.initPaginationState(tableResponse.getCurrentPage());
         return pageData;
     }
 }

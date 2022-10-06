@@ -39,12 +39,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/css/**", "/js/**", "/registration", "/products/**", "/").permitAll()
+                .antMatchers("/css/**", "/js/**", "/registration", "/brands/**", "/products/**",
+                        "/products/{id}", "/", "/plp", "/brand_plp").permitAll()
                 .antMatchers("/personal/**").access("hasRole('ROLE_PERSONAL')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 //.antMatchers("/products/**").access("hasAnyRole('ROLE_ADMIN', 'ROLE_PERSONAL')")
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/products").permitAll()
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login");
     }
 

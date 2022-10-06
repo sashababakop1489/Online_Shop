@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
@@ -60,7 +61,7 @@ public class CrudRepositoryHelperImpl<
         dataTableResponse.setItems(entityPage.getContent());
         return dataTableResponse;
     }
-
+    @Transactional
     private void checkExist(R repository, Long id) {
         if (!repository.existsById(id)) {
             throw new EntityNotFoundException("this entity is not found");

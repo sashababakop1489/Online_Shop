@@ -8,7 +8,8 @@ public class MainController {
 
     @GetMapping
     public String main(){
-        return "redirect:/products";
+        return "redirect:/brands";
     }
+
 
 }

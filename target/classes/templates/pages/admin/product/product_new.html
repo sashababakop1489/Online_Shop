@@ -5,7 +5,7 @@
       layout:decorate="~{fragments/admin_layout}">
 <head>
     <meta charset="utf-8">
-    <title>New Book</title>
+    <title>New Product</title>
 </head>
 <body>
 
@@ -15,29 +15,39 @@
         <div class="col-12">
             <div class="card mt-2">
                 <div class="card-header">
-                    <h4>New book</h4>
+                    <h4>New product</h4>
                 </div>
                 <div class="card-body">
                     <form action="#" th:action="@{/admin/products/create}" th:object="${product}" method="post">
+                        <input type="hidden" th:field="*{brandId}" th:value="${brandId}" th:attr="name='brandId'">
                         <div class="form-group">
-                            <label for="bookName">Book name</label>
-                            <input type="text" class="form-control" id="bookName" aria-describedby="bookName" placeholder="Enter book name" th:field="*{bookName}">
+                            <label for="productName">Product name</label>
+                            <input type="text" class="form-control" id="productName" aria-describedby="productName" placeholder="Enter product name" th:field="*{productName}">
                         </div>
                         <div class="form-group">
-                            <label for="pageSize">Book page size</label>
-                            <input type="number" class="form-control" id="pageSize" aria-describedby="pageSize" placeholder="Enter book page size" th:field="*{pageSize}">
+                            <label for="size">Product size</label>
+                            <input type="text" class="form-control" id="size" aria-describedby="size" placeholder="Enter product size" th:field="*{size}">
                         </div>
                         <div class="form-group">
-                            <label for="publicationDate">Book publication date</label>
-                            <input type="number" class="form-control" id="publicationDate" aria-describedby="publicationDate" placeholder="Enter book publicationDate" th:field="*{publicationDate}">
+                            <label for="quantity">Product quantity</label>
+                            <input type="text" class="form-control" id="quantity" aria-describedby="quantity" placeholder="Enter product quantity" th:field="*{quantity}">
                         </div>
                         <div class="form-group">
-                            <label for="description">Book description</label>
+                            <label for="color">Product color</label>
+                            <input type="text" class="form-control" id="color" aria-describedby="color" placeholder="Enter product color" th:field="*{color}">
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Product price</label>
+                            <input type="text" class="form-control" id="price" aria-describedby="price" placeholder="Enter product price" th:field="*{price}">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Product description</label>
                             <textarea class="form-control" id="description" placeholder="Enter book description" rows="6" th:field="*{description}" />
                         </div>
+
                         <div class="form-group">
-                            <label for="bookImage">Book image url</label>
-                            <input type="text" class="form-control" id="bookImage" aria-describedby="bookImage" placeholder="Enter book image url" th:field="*{bookImage}">
+                            <label for="productImage">product image url</label>
+                            <input type="text" class="form-control" id="productImage" aria-describedby="productImage" placeholder="Enter product image url" th:field="*{productImage}">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

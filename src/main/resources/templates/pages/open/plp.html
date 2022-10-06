@@ -168,15 +168,16 @@
     <div class="container fixed-container d-flex justify-content-center">
         <div class="row mt-4 mb-4">
             <!--            <div class="col col-md-6 col-lg-4 col-xl-3 d-flex align-items-stretch" th:each="book : ${bookList}">-->
-            <div class="col d-flex align-items-stretch" th:each="book : ${bookList}">
+            <div class="col d-flex align-items-stretch" th:each="product : ${productList}">
                 <figure class="card card-product-grid">
-                    <a href="#" class="img-wrap" data-abc="true">
-                        <img th:src="${book.getImageUrl()}"> </a>
+                    <a href="@{'/products/details/' + ${product.getId()}}" class="img-wrap" data-abc="true">
+                        <img th:src="${product.getImageUrl()}"> </a>
                     <figcaption class="info-wrap">
                         <div class="row">
                             <div class="col-md-9">
-                                <a href="#" class="title" data-abc="true" th:text="${book.getBookName()}">name</a>
-                                <a th:href="@{'/books' + '?publisher=' + ${book.getPublisher().getId()}}" class="rated" th:text="${book.getPublisher().getName()}">name</a>
+                                <a href="#" class="title" data-abc="true" th:text="${product.getProductName()}">name</a>
+                                <a href="#" class="title" data-abc="true" th:text="${product.getBrand().getBrandName()}">brandName</a>
+<!--                                <a th:href="@{'/products' + '?publisher=' + ${product.getPublisher().getId()}}" class="rated" th:text="${product.getPublisher().getName()}">name</a>-->
                                 <!--                                <div th:each="author : ${book.getAuthors()}">-->
                                 <!--                                    <span class="rated" th:text="${author}">author</span>-->
                                 <!--                                </div>-->
@@ -196,17 +197,17 @@
                         <figcaption class="info-wrap">
                             <div class="row">
                                 <div class="col-md-9 col-xs-9">
-                                    <a href="#" class="title" data-abc="true" th:text="${'$' + book.getActualPrice()}">$0,0</a>
-                                    <span class="rated" th:text="${'$' + book.getPrice()}">$0,0</span>
+                                    <a href="#" class="title" data-abc="true" th:text="${'$' + product.getPrice()}">$0,0</a>
+<!--                                    <span class="rated" th:text="${'$' + product.getPrice()}">$0,0</span>-->
                                 </div>
-                                <div class="col-md-3 col-xs-3">
-                                    <div class="rating text-right"> #### 8787 </div>
-                                </div>
+<!--                                <div class="col-md-3 col-xs-3">-->
+<!--                                    <div class="rating text-right"> #### 8787 </div>-->
+<!--                                </div>-->
                             </div>
                         </figcaption>
                     </div>
                     <div class="bottom-wrap">
-                        <a href="#" class="btn btn-primary float-right" data-abc="true" th:disabled="${!book.getVisible()}">add to cart</a>
+                        <a href="#" class="btn btn-primary float-right" data-abc="true">add to cart</a>
                         <!--                        <div class="price-wrap">-->
                         <!--                            <a href="#" class="btn btn-danger float-left" data-abc="true">add to my favourites</a>-->
                         <!--                        </div>-->

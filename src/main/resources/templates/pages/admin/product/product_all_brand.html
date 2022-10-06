@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+  <meta charset="utf-8">
+  <title>Players</title>
+</head>
+<body>
+
+<div layout:fragment="admin_content">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-2 mt-2">
+        <div class="card-header">
+          All Players
+        </div>
+        <div class="card-body">
+          <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>image</th>
+              <th>product name</th>
+              <th>size</th>
+              <th>color</th>
+              <th>price</th>
+              <th>details</th>
+              <th>delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product,iter : ${products}">
+              <td th:text="${iter.count}"></td>
+              <td>
+                <img th:src="@{${product.getImageUrl()}}" width="45" height="45"/>
+              </td>
+              <td th:text="${product.getProductName()}"></td>
+              <td th:text="${product.getSize()}"></td>
+              <td th:text="${product.getColor()}"></td>
+              <td th:text="${product.getPrice()}"></td>
+              <td th:text="${product.getQuantity()}"></td>
+              <td>
+                <a th:href="@{'/admin/brands/details/' + ${product.getBrand().getId()}}" type="button" class="btn btn-link" th:text="${product.getBrand().getBrandName()}">details</a>
+              </td>
+
+              <td>
+                <a th:href="@{'/products/details/' + ${product.getId()}}" type="button" class="btn btn-primary">details</a>
+              </td>
+              <td>
+                <a th:href="@{'/products/delete/' + ${product.getId()}}" type="button" class="btn btn-danger">delete</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

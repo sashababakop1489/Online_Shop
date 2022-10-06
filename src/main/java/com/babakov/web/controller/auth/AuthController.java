@@ -2,17 +2,22 @@ package com.babakov.web.controller.auth;
 
 import com.babakov.config.security.SecurityService;
 import com.babakov.facade.AuthValidatorFacade;
+import com.babakov.facade.ProductFacade;
 import com.babakov.facade.RegistrationFacade;
 import com.babakov.persistence.type.RoleType;
 import com.babakov.util.SecurityUtil;
 import com.babakov.web.controller.AbstractController;
 import com.babakov.web.dto.request.register.AuthDto;
+import com.babakov.web.dto.response.ProductResponseDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 
 @Controller
@@ -21,14 +26,16 @@ public class AuthController extends AbstractController {
     private final RegistrationFacade registrationFacade;
     private final AuthValidatorFacade authValidatorFacade;
     private final SecurityService securityService;
+    private final ProductFacade productFacade;
 
     public AuthController(
             RegistrationFacade registrationFacade,
             AuthValidatorFacade authValidatorFacade,
-            SecurityService securityService) {
+            SecurityService securityService, ProductFacade productFacade) {
         this.registrationFacade = registrationFacade;
         this.authValidatorFacade = authValidatorFacade;
         this.securityService = securityService;
+        this.productFacade = productFacade;
     }
     @GetMapping("/")
     public String main(Model model){
@@ -38,6 +45,13 @@ public class AuthController extends AbstractController {
     @GetMapping("/open")
     public String open(Model model){
         return "pares/open/open";
+    }
+
+    @GetMapping("/products/{id}")
+    public String findAll(Model model, @PathVariable Long id) {
+        List<ProductResponseDto> products = productFacade.findAllByBrandId(id);
+        model.addAttribute("products", products);
+        return "pages/open/product_all";
     }
 
 

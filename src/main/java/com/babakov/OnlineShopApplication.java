@@ -31,7 +31,7 @@ public class OnlineShopApplication {
     @EventListener(ApplicationReadyEvent.class)
     public void listen() {
 //        Admin admin = new Admin();
-//        admin.setEmail("admin@mail.com");
+//        admin.setEmail("admin@gmail.com");
 //        admin.setPassword(encoder.encode("rootroot"));
 //        adminRepository.save(admin);
     }

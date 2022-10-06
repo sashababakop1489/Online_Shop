@@ -12,10 +12,10 @@
 <div class="container-fluid">
     <div layout:fragment="content">
         <nav class="navbar navbar-dark bg-dark fixed-top">
-            <a class="nav-item nav-link" th:href="@{/books}">Books</a>
-            <form class="d-flex" method="POST" th:action="@{/books/search}" id="bookSearch">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="bookNamed">
-                <button class="btn btn-outline-success" type="submit" id="btnBookSearch">Search</button>
+            <a class="nav-item nav-link" th:href="@{/brands}">Brands</a>
+            <form class="d-flex" method="POST" th:action="@{/brand/search}" id="brandSearch">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="brandNamed">
+                <button class="btn btn-outline-success" type="submit" id="btnProductSearch">Search</button>
             </form>
             <a class="nav-item nav-link" th:href="@{/login}" style="cursor: pointer !important;">Login</a>
         </nav>

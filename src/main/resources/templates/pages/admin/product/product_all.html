@@ -13,14 +13,15 @@
     <tr th:each="product,iter : ${pageData.getItems()}">
         <td th:text="${iter.count}"></td>
         <td>
-            <img th:src="@{${book.getImageUrl()}}" width="45" height="45"/>
+            <img th:src="@{${product.getImageUrl()}}" width="45" height="45"/>
         </td>
-        <td th:text="${product.getBookName()}"></td>
-        <td th:text="${product.getPageSize()}"></td>
-        <td th:text="${product.getPublicationDate()}"></td>
-        <td th:text="${#calendars.format(book.getCreated(),'dd MMMM yyyy')}"></td>
+        <td th:text="${product.getProductName()}"></td>
+        <td th:text="${product.getBrand().getBrandName()}"></td>
+        <td th:text="${product.getSize()}"></td>
+        <td th:text="${product.getColor()}"></td>
         <td th:text="${product.getPrice()}"></td>
         <td th:text="${product.getQuantity()}"></td>
+<!--        <td th:text="${product.getDescription()}"></td>-->
         <td>
             <a th:href="@{'/admin/products/details/' + ${product.getId()}}" type="button" class="btn btn-primary">details</a>
         </td>
@@ -28,6 +29,13 @@
             <a th:href="@{'/admin/products/delete/' + ${product.getId()}}" type="button" class="btn btn-danger">delete</a>
         </td>
     </tr>
+    <div class="col-12">
+        <div class="card mt-2">
+            <div class="card-header">
+                <a type="button" class="btn btn-primary" th:href="@{products/new}">Add</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

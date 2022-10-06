@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $('#bookNamed').autocomplete({
+    $('#productNamed').autocomplete({
             source: function (request, response) {
-                $.get("http://localhost:8080/books/suggestions?", {q: request.term}, function (data, status) {
+                $.get("http://localhost:8080/products/suggestions?", {q: request.term}, function (data, status) {
                     $("#results").html("");
                     if (status === 'success') {
                         response(data);
@@ -11,18 +11,18 @@ $(document).ready(function () {
         }
     );
 
-    $("#btnBookSearch").click(function () {
-        const inputText = $("#bookNamed").val();
+    $("#btnProductSearch").click(function () {
+        const inputText = $("#productNamed").val();
         if (inputText.length === 0) {
             alert("Enter product name or description");
         } else {
-            let bookSearch = document.getElementById('bookSearch');
-            if (bookSearch) {
+            let productSearch = document.getElementById('productSearch');
+            if (productSearch) {
                 let input = document.createElement("input");
                 input.setAttribute("type", "hidden");
-                input.setAttribute("name", "bookSearch");
+                input.setAttribute("name", "productSearch");
                 input.setAttribute("value", inputText);
-                bookSearch.appendChild(input);
+                productSearch.appendChild(input);
             }
         }
     });

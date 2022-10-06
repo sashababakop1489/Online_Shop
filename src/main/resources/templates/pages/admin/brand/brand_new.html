@@ -5,7 +5,7 @@
       layout:decorate="~{fragments/admin_layout}">
 <head>
     <meta charset="utf-8">
-    <title>New Book</title>
+    <title>New Brand</title>
 </head>
 <body>
 
@@ -15,30 +15,21 @@
         <div class="col-12">
             <div class="card mt-2">
                 <div class="card-header">
-                    <h4>New book</h4>
+                    <h4>New brand</h4>
                 </div>
                 <div class="card-body">
-                    <form action="#" th:action="@{/admin/products/create}" th:object="${product}" method="post">
+                    <form action="#" th:action="@{/admin/brands/create}" th:object="${brand}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="bookName">Book name</label>
-                            <input type="text" class="form-control" id="bookName" aria-describedby="bookName" placeholder="Enter book name" th:field="*{bookName}">
+                            <label for="brandName">Brand name</label>
+                            <input type="text" class="form-control" id="brandName" aria-describedby="brandName" placeholder="Enter brand name" th:field="*{brandName}">
                         </div>
                         <div class="form-group">
-                            <label for="pageSize">Book page size</label>
-                            <input type="number" class="form-control" id="pageSize" aria-describedby="pageSize" placeholder="Enter book page size" th:field="*{pageSize}">
+                            <label for="brandImage">Brand image url</label>
+                            <input type="text" class="form-control" id="brandImage" aria-describedby="brandImage" placeholder="Enter brand image url" th:field="*{brandImage}">
                         </div>
-                        <div class="form-group">
-                            <label for="publicationDate">Book publication date</label>
-                            <input type="number" class="form-control" id="publicationDate" aria-describedby="publicationDate" placeholder="Enter book publicationDate" th:field="*{publicationDate}">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Book description</label>
-                            <textarea class="form-control" id="description" placeholder="Enter book description" rows="6" th:field="*{description}" />
-                        </div>
-                        <div class="form-group">
-                            <label for="bookImage">Book image url</label>
-                            <input type="text" class="form-control" id="bookImage" aria-describedby="bookImage" placeholder="Enter book image url" th:field="*{bookImage}">
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <input type="file" name="file" class="form-control-file">-->
+<!--                        </div>-->
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

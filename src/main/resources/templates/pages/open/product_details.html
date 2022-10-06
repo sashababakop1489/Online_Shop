@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/open_layout}">
+<head>
+  <meta charset="utf-8">
+  <title>product</title>
+</head>
+<body>
+
+<div layout:fragment="open_content">
+  <div class="container">
+    <div class="card mt-4 mb-4">
+      <div class="card-header">
+        <div class="row align-items-center">
+          <div class="col-4">
+            <img th:src="@{${product.getImageUrl()}}" width="180" height="220"/>
+          </div>
+          <div class="col-8">
+            <h3 class="card-title" th:text="${product.getProductName()}">name</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <tr>
+            <td>id</td>
+            <td th:text="${product.getId()}">id</td>
+          </tr>
+          <tr>
+            <td>visible</td>
+            <td th:text="${product.getVisible()}">id</td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td th:text="${product.getSize()}">id</td>
+          </tr>
+          <tr>
+            <td>price</td>
+            <td th:text="${'$' + book.getPrice()}">id</td>
+          </tr>
+          <tr>
+            <td>quantity</td>
+            <td th:text="${book.getQuantity()}">id</td>
+          </tr>
+          <tr th:if="${book.getBrand() != null}">
+            <td>brand</td>
+            <td>
+              <a
+                      th:href="@{'/brands/' + ${product.getBrand().getId()}}"
+                      th:text="${product.getBrand().getName}"
+                      type="button" class="btn btn-link"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>description</td>
+            <td>
+              <p>
+                <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  show
+                </a>
+                <!--                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">-->
+                <!--                                    Button with data-bs-target-->
+                <!--                                </button>-->
+              </p>
+              <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                  <span th:text="${product.getDescription()}"></span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

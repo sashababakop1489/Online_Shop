@@ -4,7 +4,6 @@ import com.babakov.persistence.datatable.DataTableRequest;
 import com.babakov.persistence.datatable.DataTableResponse;
 import com.babakov.persistence.entity.BaseEntity;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface BaseService<E extends BaseEntity> {

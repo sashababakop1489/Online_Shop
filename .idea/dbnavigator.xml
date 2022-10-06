@@ -29,7 +29,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="f094f09b-b210-42fd-a167-fc36cc76e251">
-      <console name="Connection" type="STANDARD" schema="" session="Main" />
+      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select * from brands]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -86,8 +86,8 @@
           <port value="5432" />
           <database value="online_shop" />
           <type value="USER_PASSWORD" />
-          <user value="postgres" />
-          <deprecated-pwd value="" />
+          <user value="root" />
+          <deprecated-pwd value="cG9zdGdyZXNz" />
         </database>
         <properties>
           <auto-commit value="false" />
