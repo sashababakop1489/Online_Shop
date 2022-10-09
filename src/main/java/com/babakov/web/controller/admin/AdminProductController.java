@@ -89,7 +89,7 @@ public class AdminProductController extends AbstractController {
         try {
             Long productId = Long.parseLong(id);
             ProductResponseDto dto = productFacade.findById(productId);
-            model.addAttribute("book", dto);
+            model.addAttribute("product", dto);
             return "pages/admin/product/product_details";
         } catch (NumberFormatException e) {
             throw new NumberFormatException("incorrect value id");

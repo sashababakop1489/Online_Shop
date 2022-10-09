@@ -33,12 +33,14 @@ public class OpenProductController {
         return "pages/open/plp";
     }
 
-//    @GetMapping("/{id}")
-//    public String findAll(Model model, @PathVariable Long id) {
+    @GetMapping("/{id}")
+    public String findAll(Model model, WebRequest webRequest){//Model model, @PathVariable Long id) {
+        model.addAttribute("productList", plpFacade.search(webRequest));
+        return "pages/open/plp";
 //        List<ProductResponseDto> products = productFacade.findAllByBrandId(id);
 //        model.addAttribute("products", products);
 //        return "pages/open/product_all";
-//    }
+    }
 
     @PostMapping("/search")
     private String allProductsSearch(

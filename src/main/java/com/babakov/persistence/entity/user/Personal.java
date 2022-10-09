@@ -1,5 +1,6 @@
 package com.babakov.persistence.entity.user;
 
+import com.babakov.persistence.listener.FullNameGenerationListener;
 import com.babakov.persistence.type.RoleType;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,9 @@ import java.util.Date;
 @Setter
 @Entity
 @DiscriminatorValue("PERSONAL")
+@EntityListeners({
+        FullNameGenerationListener.class,
+})
 public class Personal extends User{
 
     @Temporal(TemporalType.TIMESTAMP)

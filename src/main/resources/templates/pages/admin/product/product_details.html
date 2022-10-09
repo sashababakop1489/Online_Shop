@@ -5,7 +5,7 @@
       layout:decorate="~{fragments/admin_layout}">
 <head>
     <meta charset="utf-8">
-    <title>books</title>
+    <title>product</title>
 </head>
 <body>
 
@@ -15,10 +15,10 @@
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col-4">
-                        <img th:src="@{${book.getImageUrl()}}" width="180" height="220"/>
+                        <img th:src="@{${product.getImageUrl()}}" width="180" height="220"/>
                     </div>
                     <div class="col-8">
-                        <h3 class="card-title" th:text="${book.getBookName()}">name</h3>
+                        <h3 class="card-title" th:text="${product.getProductName()}">name</h3>
                     </div>
                 </div>
             </div>
@@ -26,88 +26,53 @@
                 <table class="table">
                     <tr>
                         <td>id</td>
-                        <td th:text="${book.getId()}">id</td>
+                        <td th:text="${product.getId()}">id</td>
+                    </tr>
+<!--                    <tr>-->
+<!--                        <td>visible</td>-->
+<!--                        <td th:text="${product.getVisible()}">id</td>-->
+<!--                    </tr>-->
+                    <tr>
+                        <td>size</td>
+                        <td th:text="${product.getSize()}">id</td>
                     </tr>
                     <tr>
-                        <td>created</td>
-                        <td th:text="${#calendars.format(book.getCreated(),'dd MMMM yyyy')}">id</td>
-                    </tr>
-                    <tr>
-                        <td>updated</td>
-                        <td th:text="${#calendars.format(book.getUpdated(),'dd MMMM yyyy')}">id</td>
-                    </tr>
-                    <tr>
-                        <td>visible</td>
-                        <td th:text="${book.getVisible()}">id</td>
-                    </tr>
-                    <tr>
-                        <td>page size</td>
-                        <td th:text="${book.getPageSize()}">id</td>
-                    </tr>
-                    <tr>
-                        <td>publication date</td>
-                        <td th:text="${book.getPublicationDate()}">id</td>
+                        <td>color</td>
+                        <td th:text="${product.getColor()}">id</td>
                     </tr>
                     <tr>
                         <td>price</td>
-                        <td th:text="${'$' + book.getPrice()}">id</td>
+                        <td th:text="${'$' + product.getPrice()}">id</td>
                     </tr>
                     <tr>
                         <td>quantity</td>
-                        <td th:text="${book.getQuantity()}">id</td>
+                        <td th:text="${product.getQuantity()}">id</td>
                     </tr>
-                    <tr th:if="${book.getPublisher() != null}">
-                        <td>publisher</td>
+                    <tr th:if="${product.getBrand() != null}">
+                        <td>brand</td>
                         <td>
                             <a
-                                    th:href="@{'/admin/publishers/' + ${book.getPublisher().getId()}}"
-                                    th:text="${book.getPublisher().getName}"
+                                    th:href="@{'/admin/brands/' + ${product.getBrand().getId()}}"
+                                    th:text="${product.getBrand().getBrandName}"
                                     type="button" class="btn btn-link"></a>
                         </td>
                     </tr>
-                    <tr th:if="${not #lists.isEmpty(book.getAuthors())}">
-                        <td>authors</td>
-                        <td>
-                            <ul th:each="author : ${book.getAuthors()}">
-                                <li>
-                                    <a
-                                            th:href="@{'/admin/authors/' + ${author.getId()}}"
-                                            th:text="${author.getFirstName() + ' ' + author.getLastName()}"
-                                            type="button" class="btn btn-link"></a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr th:if="${not #lists.isEmpty(book.getGenres())}">
-                        <td>authors</td>
-                        <td>
-                            <ul th:each="genre : ${book.getGenres()}">
-                                <li>
-                                    <a
-                                            th:href="@{'/admin/genres/' + ${genre.getId()}}"
-                                            th:text="${genre.getType()}"
-                                            type="button" class="btn btn-link"></a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>description</td>
-                        <td>
-                            <p>
-                                <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    show
-                                </a>
-<!--                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">-->
-<!--                                    Button with data-bs-target-->
-<!--                                </button>-->
-                            </p>
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body">
-                                    <span th:text="${book.getDescription()}"></span>
-                                </div>
-                            </div>
-                        </td>
+<!--                        <td>description</td>-->
+<!--                        <td>-->
+<!--                            <p>-->
+<!--                                <a class="btn btn-link" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">-->
+<!--                                    show-->
+<!--                                </a>-->
+<!--&lt;!&ndash;                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    Button with data-bs-target&ndash;&gt;-->
+<!--&lt;!&ndash;                                </button>&ndash;&gt;-->
+<!--                            </p>-->
+<!--                            <div class="collapse" id="collapseExample">-->
+<!--                                <div class="card card-body">-->
+<!--                                    <span th:text="${product.getDescription()}"></span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </td>-->
                     </tr>
                 </table>
             </div>

@@ -47,12 +47,12 @@ public class AuthController extends AbstractController {
         return "pares/open/open";
     }
 
-    @GetMapping("/products/{id}")
-    public String findAll(Model model, @PathVariable Long id) {
-        List<ProductResponseDto> products = productFacade.findAllByBrandId(id);
-        model.addAttribute("products", products);
-        return "pages/open/product_all";
-    }
+//    @GetMapping("/products/{id}")
+//    public String findAll(Model model, @PathVariable Long id) {
+//        List<ProductResponseDto> products = productFacade.findAllByBrandId(id);
+//        model.addAttribute("products", products);
+//        return "pages/open/product_all";
+//    }
 
 
     @GetMapping("/login")

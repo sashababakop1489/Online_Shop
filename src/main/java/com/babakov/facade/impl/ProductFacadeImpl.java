@@ -36,7 +36,7 @@ public class ProductFacadeImpl implements ProductFacade {
         if (optionalBrand.isPresent()) {
             Product product = new Product();
             product.setProductName(productRequestDto.getProductName());
-            product.setQuantity(product.getQuantity());
+            product.setQuantity(productRequestDto.getQuantity());
             product.setPrice(productRequestDto.getPrice());
             product.setColor(productRequestDto.getColor());
             product.setImageUrl(new String(productRequestDto.getProductImage().getBytes()));

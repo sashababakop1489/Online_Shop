@@ -170,7 +170,6 @@
             <!--            <div class="col col-md-6 col-lg-4 col-xl-3 d-flex align-items-stretch" th:each="book : ${bookList}">-->
             <div class="col d-flex align-items-stretch" th:each="brand : ${brandList}">
                 <figure class="card card-product-grid">
-<!--                    /' + ${brand.getId()}-->
                     <a href="@{'/products/' + ${brand.getId()}}" class="img-wrap" data-abc="true">
                         <img th:src="${brand.getImageUrl()}"> </a>
                     <figcaption class="info-wrap">
